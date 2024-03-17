@@ -38,7 +38,7 @@ def process_image(image):
 
 
 # 画像を受け取るエンドポイント
-@app.post("/")
+@app.get("/")
 async def upload_image(file: UploadFile = File(...)):
     contents = await file.read()
     processed_image = process_image(contents)
