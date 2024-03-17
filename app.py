@@ -51,4 +51,3 @@ async def upload_image(file: UploadFile = File(...)):
 
 # 画像から文字を抽出する関数
 # この関数はまだ実装されていません。必要に応じて追加してください。
-
