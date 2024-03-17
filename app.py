@@ -1,13 +1,13 @@
 import cv2
 import numpy as np
-from flask import Flask, request
+from fastapi import FastAPI, File, UploadFile
 
-app = Flask(__name__)
+app = FastAPI()
 
-#画像を読み込んで加工する関数
-def process_image(image_path):
+# 画像を読み込んで加工する関数
+def process_image(image):
     # 画像を読み込む
-    img = cv2.imread(image_path)
+    img = cv2.imdecode(np.fromstring(image, np.uint8), cv2.IMREAD_COLOR)
 
     # グレースケールに変換
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -36,17 +36,14 @@ def process_image(image_path):
     return processed_image
 
 
-#webアプリケーションのルート関数
-@app.route('/', methods=['POST'])
-def upload_image():
-    image_file = request.files['file']
-    if image_file:
-        # 画像を加工する関数を実行
-        processed_image = process_image(image_file)
-        #画像から文字を抽出する関数を実行
-        
-    else:
-        return 'No image file received'
+# 画像を受け取るエンドポイント
+@app.post("/")
+async def upload_image(file: UploadFile = File(...)):
+    contents = await file.read()
+    processed_image = process_image(contents)
+    # ここに画像から文字を抽出する処理を追加する
+    return {"message": "Image processed successfully!"}
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
