@@ -42,5 +42,13 @@ def process_image(image):
 async def upload_image(file: UploadFile = File(...)):
     contents = await file.read()
     processed_image = process_image(contents)
+
     # ここに画像から文字を抽出する処理を追加する
+    # 例：text = extract_text(processed_image)
+
+    # 処理結果を返す
     return {"message": "Image processed successfully!"}
+
+# 画像から文字を抽出する関数
+# この関数はまだ実装されていません。必要に応じて追加してください。
+
