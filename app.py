@@ -7,7 +7,7 @@ app = FastAPI()
 # 画像を読み込んで加工する関数
 def process_image(image):
     # 画像を読み込む
-    img = cv2.imdecode(np.fromstring(image, np.uint8), cv2.IMREAD_COLOR)
+    img = cv2.imdecode(np.frombuffer()(image, np.uint8), cv2.IMREAD_COLOR)
 
     # グレースケールに変換
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
