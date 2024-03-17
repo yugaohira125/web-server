@@ -1,6 +1,6 @@
 opencv-python
 numpy
-fastapi
+flask
 python-multipart
 uvicorn
 gunicorn
