@@ -1,6 +1,5 @@
 opencv-python
 numpy
 flask
-python-multipart
 uvicorn
 gunicorn
