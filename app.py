@@ -1,13 +1,14 @@
 import cv2
 import numpy as np
 from fastapi import FastAPI, File, UploadFile
+from io import BytesIO
 
 app = FastAPI()
 
 # 画像を読み込んで加工する関数
 def process_image(image):
     # 画像を読み込む
-    img = cv2.imdecode(np.frombuffer()(image, np.uint8), cv2.IMREAD_COLOR)
+    img = cv2.imdecode(np.frombuffer(image, np.uint8), cv2.IMREAD_COLOR)
 
     # グレースケールに変換
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -43,8 +44,3 @@ async def upload_image(file: UploadFile = File(...)):
     processed_image = process_image(contents)
     # ここに画像から文字を抽出する処理を追加する
     return {"message": "Image processed successfully!"}
-
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
-
