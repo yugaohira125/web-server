@@ -4,3 +4,7 @@ fastapi
 uvicorn
 gunicorn
 python-multipart
+tesseract
+tesseract-ocr
+pytesseract
+matplotlib
